@@ -11,7 +11,7 @@
             --dark-bg: #0b0c10;
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.7);
-            --text-ghost: rgba(255, 255, 255, 0.3); /* Cor discreta para o DNA */
+            --text-ghost: rgba(255, 255, 255, 0.3);
         }
 
         @keyframes slowProcess { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -29,7 +29,8 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 40px 20px;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
         .background-overlay {
@@ -55,18 +56,26 @@
             position: relative;
             z-index: 10;
             max-width: 800px;
+            width: 100%;
             text-align: center;
             animation: fadeIn 2s ease-in;
         }
 
         .logo {
-            width: 140px;
+            width: 130px; /* Reduzido levemente para melhor equilíbrio */
             filter: drop-shadow(0 0 15px rgba(0, 224, 255, 0.1));
             animation: slowProcess 60s linear infinite;
             margin-bottom: 20px;
         }
 
-        h1 { font-size: 2.5rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800; }
+        h1 { 
+            font-size: clamp(1.4rem, 5vw, 2.5rem); 
+            letter-spacing: 10px; 
+            text-transform: uppercase; 
+            margin-bottom: 10px; 
+            font-weight: 800;
+            line-height: 1.2;
+        }
         
         .slogan {
             color: var(--gold);
@@ -76,39 +85,30 @@
             font-weight: 300;
         }
 
-        /* --- DNA REESTRUTURADO (DISCRETO & SUAVE) --- */
-        .dna-wrapper {
-            margin-bottom: 50px;
-        }
+        .dna-wrapper { margin-bottom: 50px; }
 
         .dna-trigger {
             display: inline-block;
-            color: var(--text-ghost); /* Branco fosco e discreto */
+            color: var(--text-ghost);
             font-size: 0.65rem;
             letter-spacing: 5px;
             text-transform: uppercase;
             cursor: pointer;
             padding: 5px 10px;
             transition: all 0.8s ease;
-            border-bottom: 1px solid transparent;
         }
 
-        .dna-trigger:hover {
-            color: var(--cyan); /* Muda para azul ao interagir, separando do dourado do slogan */
-            letter-spacing: 7px;
-        }
+        .dna-trigger:hover { color: var(--cyan); letter-spacing: 7px; }
 
         .dna-content {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            /* Transição ultra-suave e luxuosa */
             transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
             font-size: 0.85rem;
             color: var(--text-dim);
             line-height: 1.8;
-            padding: 0 50px;
-            margin-top: 0;
+            padding: 0 20px;
         }
 
         .dna-wrapper:hover .dna-content {
@@ -122,18 +122,18 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            padding: 40px;
+            padding: 30px;
             margin-bottom: 45px;
             text-align: justify;
         }
 
-        .manifesto-box p { line-height: 1.8; color: var(--text-dim); }
+        .manifesto-box p { line-height: 1.8; color: var(--text-dim); font-size: 1rem; }
 
         .cta-button {
             text-decoration: none;
             background: transparent;
             color: white;
-            padding: 15px 45px;
+            padding: 15px 40px;
             border-radius: 50px;
             font-weight: 600;
             letter-spacing: 2px;
@@ -149,7 +149,25 @@
             box-shadow: 0 0 30px rgba(0, 224, 255, 0.3);
         }
 
-        footer { margin-top: 60px; font-size: 0.65rem; color: rgba(255,255,255,0.15); letter-spacing: 4px; }
+        footer { margin-top: 60px; font-size: 0.6rem; color: rgba(255,255,255,0.15); letter-spacing: 3px; }
+
+        /* --- AJUSTES ESPECÍFICOS PARA MOBILE --- */
+        @media (max-width: 600px) {
+            h1 {
+                letter-spacing: 4px; /* Redução crucial para caber o 'Intelligence' */
+                font-size: 1.5rem;   /* Tamanho otimizado para celulares */
+            }
+            .slogan {
+                letter-spacing: 1.5px;
+                font-size: 0.85rem;
+            }
+            .manifesto-box {
+                padding: 20px;
+            }
+            .dna-content {
+                padding: 0 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -166,13 +184,12 @@
             <div class="dna-trigger">[ a gênese ]</div>
             <div class="dna-content">
                 <p><strong>Oka</strong> (Casa) + <strong>Ris</strong> (Riscado). <br>
-                A união da base sólida operacional com o planejamento estratégico deliberado. <br>
-                Uma visão brasileira aplicada à eficiência global.</p>
+                A união da base sólida operacional com o planejamento estratégico deliberado.</p>
             </div>
         </div>
 
         <div class="manifesto-box">
-            <p>O Mundo não precisa de mais dados. Ele precisa de <strong>discernimento</strong>. Na Okaris Intelligence, transformamos o rigor do mercado financeiro e a agilidade tecnológica em <strong>tempo, clareza e assertividade corporativa.</strong></p>
+            <p>O Mundo não precisa de mais dados. Ele precisa de <strong>discernimento</strong>. Na Okaris Intelligence, transformamos o rigor do mercado financeiro e a agilidade tecnológica em <strong>tempo, clareza e assertividade.</strong></p>
         </div>
 
         <a href="https://www.linkedin.com/company/okaris-intelligence/" class="cta-button" target="_blank">
