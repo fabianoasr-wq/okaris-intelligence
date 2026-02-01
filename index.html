@@ -11,6 +11,7 @@
             --dark-bg: #0b0c10;
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.7);
+            --text-ghost: rgba(255, 255, 255, 0.3);
         }
 
         @keyframes slowProcess { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -19,7 +20,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-main);
             min-height: 100vh;
@@ -27,130 +28,157 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
-            text-align: center;
+            position: relative;
+            padding: 20px;
             overflow-x: hidden;
         }
 
+        .background-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('fundo.jpg'); 
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25; 
+            z-index: 0;
+        }
+
+        .vignette {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, var(--dark-bg) 100%);
+            z-index: 1;
+        }
+
         .container {
-            max-width: 800px;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .logo-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 30px;
             position: relative;
-            animation: slowProcess 20s linear infinite;
-        }
-
-        .logo-circle {
+            z-index: 10;
+            max-width: 800px;
             width: 100%;
-            height: 100%;
-            border: 8px solid var(--gold);
-            border-right-color: var(--cyan);
-            border-radius: 50%;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
         }
 
-        h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            letter-spacing: 5px;
-            margin-bottom: 10px;
+        .logo {
+            width: 130px;
+            filter: drop-shadow(0 0 15px rgba(0, 224, 255, 0.1));
+            animation: slowProcess 60s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        h1 { 
+            font-size: clamp(1.4rem, 5vw, 2.5rem); 
+            letter-spacing: 10px; 
+            text-transform: uppercase; 
+            margin-bottom: 10px; 
             font-weight: 800;
+            line-height: 1.2;
         }
-
+        
         .slogan {
-            color: var(--cyan);
-            letter-spacing: 4px;
-            font-size: 0.9rem;
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+
+        .dna-wrapper { margin-bottom: 50px; }
+
+        .dna-trigger {
+            display: inline-block;
+            color: var(--text-ghost);
+            font-size: 0.65rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            margin-bottom: 50px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: all 0.8s ease;
         }
 
-        .dna-section {
-            margin-bottom: 60px;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.02);
-            border-radius: 15px;
+        .dna-trigger:hover { color: var(--cyan); letter-spacing: 7px; }
+
+        .dna-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            padding: 0 20px;
         }
 
-        .dna-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .dna-wrapper:hover .dna-content {
+            max-height: 250px;
+            opacity: 1;
             margin-top: 20px;
         }
 
-        .dna-item h3 { color: var(--gold); margin-bottom: 10px; }
-        .dna-item p { font-size: 0.9rem; color: var(--text-dim); }
-
         .manifesto-box {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 60px;
-            color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 45px;
+            text-align: justify;
         }
 
-        .manifesto-box strong { color: var(--white); }
+        .manifesto-box p { line-height: 1.8; color: var(--text-dim); font-size: 1.05rem; }
 
         .cta-button {
-            display: inline-block;
-            padding: 18px 40px;
-            border: 2px solid var(--cyan);
-            color: var(--cyan);
             text-decoration: none;
+            background: transparent;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
             letter-spacing: 2px;
-            font-weight: bold;
-            transition: 0.3s;
-            border-radius: 5px;
+            border: 1px solid var(--cyan);
+            transition: all 0.4s ease;
+            display: inline-block;
+            font-size: 0.9rem;
         }
 
-        .cta-button:hover {
-            background: var(--cyan);
+        .cta-button:hover { 
+            background: var(--cyan); 
             color: var(--dark-bg);
-            box-shadow: 0 0 20px rgba(0, 224, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 224, 255, 0.3);
         }
 
-        footer {
-            margin-top: 80px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.2);
-        }
+        footer { margin-top: 60px; font-size: 0.6rem; color: rgba(255,255,255,0.15); letter-spacing: 3px; }
 
         @media (max-width: 600px) {
-            .dna-grid { grid-template-columns: 1fr; }
+            h1 { letter-spacing: 4px; font-size: 1.5rem; }
+            .slogan { letter-spacing: 1.5px; font-size: 0.85rem; }
+            .manifesto-box { padding: 25px; }
+            .manifesto-box p { font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="background-overlay"></div>
+    <div class="vignette"></div>
+
     <div class="container">
-        <div class="logo-container">
-            <div class="logo-circle"></div>
-        </div>
+        <img src="logo.png" alt="Okaris Logo" class="logo">
+        <h1>Okaris Intelligence</h1>
+        <p class="slogan">A lógica da eficiência é o toque da experiência.</p>
 
-        <h1>OKARIS</h1>
-        <div class="slogan">INTELLIGENCE</div>
-
-        <div class="dna-section">
-            <div class="dna-grid">
-                <div class="dna-item">
-                    <h3>OKA</h3>
-                    <p>A Base: Maturidade estrutural e governança para sustentar a mudança.</p>
-                </div>
-                <div class="dna-item">
-                    <h3>RIS</h3>
-                    <p>O Riscado: O traço estratégico, o planejamento e o discernimento.</p>
-                </div>
+        <div class="dna-wrapper">
+            <div class="dna-trigger">[ a gênese ]</div>
+            <div class="dna-content">
+                <p><strong>Oka</strong> (Casa/Base) + <strong>Ris</strong> (Riscado/Planejamento). <br>
+                A união da base sólida operacional com o planejamento estratégico deliberado.</p>
             </div>
         </div>
 
         <div class="manifesto-box">
-            <p>O Mundo não precisa de mais dados. Ele precisa de <strong>discernimento</strong>.</p>
-            <p style="margin-top: 20px;">Transformamos o rigor corporativo em <strong>jornadas fluidas, focadas na experiência de quem decide e de quem opera.</strong></p>
+            <p>O Mundo não precisa de mais dados. Ele precisa de <strong>discernimento</strong>. Na Okaris Intelligence, transformamos o rigor corporativo e a precisão tecnológica em <strong>jornadas fluidas, focadas na melhor experiência para quem decide e para quem opera.</strong></p>
         </div>
 
         <a href="https://www.linkedin.com/company/okaris-intelligence/" class="cta-button" target="_blank">
