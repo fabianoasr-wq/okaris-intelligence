@@ -3,190 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okaris Intelligence | Estratégia & Experiência</title>
+    <title>Okaris Intelligence | A Lógica da Eficiência</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+
     <style>
         :root {
+            --bg-color: #0b0c10;
             --gold: #d4af37;
             --cyan: #00e0ff;
-            --dark-bg: #0b0c10;
-            --text-main: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.7);
-            --text-ghost: rgba(255, 255, 255, 0.3);
+            --text-gray: #c5c6c7;
+            --white: #ffffff;
         }
 
-        @keyframes slowProcess { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
+            background-color: var(--bg-color);
+            color: var(--white);
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-main);
-            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Estilo de Navegação --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(11, 12, 16, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--white), var(--text-gray));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* --- Scrollytelling Section --- */
+        #scrolly-container {
             position: relative;
-            padding: 20px;
-            overflow-x: hidden;
         }
 
-        .background-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image: url('fundo.jpg'); 
-            background-size: cover;
-            background-position: center;
-            opacity: 0.25; 
-            z-index: 0;
-        }
-
-        .vignette {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, var(--dark-bg) 100%);
+        .sticky-visual {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 1;
         }
 
-        .container {
+        #master-svg {
+            width: 350px;
+            height: 350px;
+            filter: drop-shadow(0 0 15px rgba(0, 224, 255, 0.2));
+        }
+
+        .step {
+            height: 100vh;
+            padding: 0 10%;
+            display: flex;
+            align-items: center;
             position: relative;
-            z-index: 10;
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            animation: fadeIn 2s ease-in;
+            z-index: 2;
         }
 
-        .logo {
-            width: 130px;
-            filter: drop-shadow(0 0 15px rgba(0, 224, 255, 0.1));
-            animation: slowProcess 60s linear infinite;
-            margin-bottom: 20px;
+        .content-box {
+            max-width: 450px;
+            padding: 2.5rem;
+            background: rgba(25, 26, 30, 0.9);
+            border-left: 3px solid var(--cyan);
+            border-radius: 0 10px 10px 0;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
         }
 
-        h1 { 
-            font-size: clamp(1.4rem, 5vw, 2.5rem); 
-            letter-spacing: 10px; 
-            text-transform: uppercase; 
-            margin-bottom: 10px; 
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        
-        .slogan {
+        .content-box h2 {
             color: var(--gold);
-            font-size: 1rem;
-            letter-spacing: 3px;
-            margin-bottom: 35px;
-            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
         }
 
-        .dna-wrapper { margin-bottom: 50px; }
+        /* --- Seção de Experiência --- */
+        .experience-section {
+            padding: 10rem 10%;
+            text-align: center;
+            background: #12141a;
+        }
 
-        .dna-trigger {
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-10px);
+        }
+
+        .stat-card h3 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Call to Action --- */
+        .cta-section {
+            padding: 8rem 10%;
+            text-align: center;
+        }
+
+        .btn-cta {
             display: inline-block;
-            color: var(--text-ghost);
-            font-size: 0.65rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            padding: 5px 10px;
-            transition: all 0.8s ease;
-        }
-
-        .dna-trigger:hover { color: var(--cyan); letter-spacing: 7px; }
-
-        .dna-content {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            padding: 0 20px;
-        }
-
-        .dna-wrapper:hover .dna-content {
-            max-height: 250px;
-            opacity: 1;
-            margin-top: 20px;
-        }
-
-        .manifesto-box {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 35px;
-            margin-bottom: 45px;
-            text-align: justify;
-        }
-
-        .manifesto-box p { line-height: 1.8; color: var(--text-dim); font-size: 1.05rem; }
-
-        .cta-button {
-            text-decoration: none;
+            padding: 1.2rem 3rem;
             background: transparent;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: 600;
+            color: var(--cyan);
+            border: 2px solid var(--cyan);
+            text-decoration: none;
+            font-weight: bold;
             letter-spacing: 2px;
-            border: 1px solid var(--cyan);
-            transition: all 0.4s ease;
-            display: inline-block;
-            font-size: 0.9rem;
+            transition: 0.4s;
+            text-transform: uppercase;
         }
 
-        .cta-button:hover { 
-            background: var(--cyan); 
-            color: var(--dark-bg);
-            box-shadow: 0 0 30px rgba(0, 224, 255, 0.3);
+        .btn-cta:hover {
+            background: var(--cyan);
+            color: var(--bg-color);
+            box-shadow: 0 0 30px rgba(0, 224, 255, 0.4);
         }
 
-        footer { margin-top: 60px; font-size: 0.6rem; color: rgba(255,255,255,0.15); letter-spacing: 3px; }
-
-        @media (max-width: 600px) {
-            h1 { letter-spacing: 4px; font-size: 1.5rem; }
-            .slogan { letter-spacing: 1.5px; font-size: 0.85rem; }
-            .manifesto-box { padding: 25px; }
-            .manifesto-box p { font-size: 0.95rem; }
+        @media (max-width: 768px) {
+            .step { justify-content: center; text-align: center; }
+            .content-box { border-left: none; border-top: 3px solid var(--cyan); }
+            #master-svg { width: 250px; height: 250px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-overlay"></div>
-    <div class="vignette"></div>
+    <header>
+        <a href="#" class="brand-name">OKARIS INTELLIGENCE</a>
+        <a href="https://linkedin.com/in/SEU-PERFIL" class="btn-cta" style="padding: 0.5rem 1rem; font-size: 0.8rem;">CONTATO</a>
+    </header>
 
-    <div class="container">
-        <img src="logo.png" alt="Okaris Logo" class="logo">
-        <h1>Okaris Intelligence</h1>
-        <p class="slogan">A lógica da eficiência é o toque da experiência.</p>
+    <section class="hero">
+        <h1>Discernimento é o novo diferencial.</h1>
+        <p>A lógica da eficiência é o toque da experiência.</p>
+    </section>
 
-        <div class="dna-wrapper">
-            <div class="dna-trigger">[ a gênese ]</div>
-            <div class="dna-content">
-                <p><strong>Oka</strong> (Casa/Base) + <strong>Ris</strong> (Riscado/Planejamento). <br>
-                A união da base sólida operacional com o planejamento estratégico deliberado.</p>
+    <div id="scrolly-container">
+        <div class="sticky-visual">
+            <svg id="master-svg" viewBox="0 0 200 200">
+                <path id="oka-path" d="M 100, 100 m -70, 0 a 70,70 0 1,0 140,0 a 70,70 0 1,0 -140,0" 
+                      fill="none" stroke="#d4af37" stroke-width="12" stroke-linecap="round" />
+                
+                <line id="ris-path" x1="140" y1="140" x2="60" y2="60" 
+                      stroke="#00e0ff" stroke-width="8" stroke-linecap="round" />
+            </svg>
+        </div>
+
+        <section class="step">
+            <div class="content-box">
+                <h2>O Excesso de Dados</h2>
+                <p>Em grandes ecossistemas, o excesso de informação gera paralisia. Onde todos veem ruído, nós buscamos a clareza.</p>
             </div>
-        </div>
+        </section>
 
-        <div class="manifesto-box">
-            <p>O Mundo não precisa de mais dados. Ele precisa de <strong>discernimento</strong>. Na Okaris Intelligence, transformamos o rigor corporativo e a precisão tecnológica em <strong>jornadas fluidas, focadas na melhor experiência para quem decide e para quem opera.</strong></p>
-        </div>
+        <section class="step">
+            <div class="content-box">
+                <h2>Oka: A Estrutura</h2>
+                <p>20 anos de bagagem em gigantes como Itaú, Vivo e Latam. Uma base sólida para sustentar transformações reais.</p>
+            </div>
+        </section>
 
-        <a href="https://www.linkedin.com/company/okaris-intelligence/" class="cta-button" target="_blank">
-            CONECTAR VIA LINKEDIN
-        </a>
-
-        <footer>WWW.OKARIS.COM.BR &copy; 2026</footer>
+        <section class="step">
+            <div class="content-box">
+                <h2>Ris: O Riscado</h2>
+                <p>Design Thinking e agilidade técnica. O traço preciso que fatia a burocracia e redesenha a eficiência.</p>
+            </div>
+        </section>
     </div>
 
+    <section class="experience-section">
+        <h2>Maturidade Corporativa</h2>
+        <div class="experience-grid">
+            <div class="stat-card">
+                <h3>20+</h3>
+                <p>Anos de Experiência</p>
+            </div>
+            <div class="stat-card">
+                <h3>3</h3>
+                <p>Países Atuados</p>
+            </div>
+            <div class="stat-card">
+                <h3>∞</h3>
+                <p>Foco em Eficiência</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Pronto para riscar o próximo passo?</h2>
+        <br><br>
+        <a href="https://linkedin.com/in/SEU-PERFIL" class="btn-cta">CONECTAR NO LINKEDIN</a>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Configuração Inicial das Peças do Logo
+        gsap.set("#oka-path", { drawSVG: "0%" });
+        gsap.set("#ris-path", { scale: 0, opacity: 0, transformOrigin: "center" });
+
+        // Timeline do Scrollytelling
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#scrolly-container",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+
+        tl.to("#oka-path", { strokeDasharray: "440", strokeDashoffset: "0", duration: 2 }) // Desenha o Anel
+          .to("#ris-path", { scale: 1, opacity: 1, duration: 1 }, "-=0.5") // Surge o Riscado
+          .to("#master-svg", { rotation: 360, duration: 2, ease: "none" }, "-=1");
+
+        // Animação das caixas de texto
+        gsap.utils.toArray(".content-box").forEach((box) => {
+            gsap.from(box, {
+                scrollTrigger: {
+                    trigger: box,
+                    start: "top 80%",
+                    end: "top 40%",
+                    scrub: true
+                },
+                opacity: 0,
+                x: -50
+            });
+        });
+    </script>
 </body>
 </html>
